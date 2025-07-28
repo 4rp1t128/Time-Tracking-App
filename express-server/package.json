@@ -1,0 +1,29 @@
+{
+  "name": "t3-express-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "db:generate": "drizzle-kit generate --config=drizzle.config.js",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "dev": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "Paras Punjabi",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "drizzle-orm": "^0.44.3",
+    "express": "^5.1.0",
+    "mysql2": "^3.14.2"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.31.4",
+    "nodemon": "^3.1.10"
+  }
+}
