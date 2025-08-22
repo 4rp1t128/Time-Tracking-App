@@ -1,4 +1,4 @@
-# Mercor Time Tracking Trial (T3)
+# Time Tracking App
 
 ### Tech Stack Used
  - Next.JS for frontend
