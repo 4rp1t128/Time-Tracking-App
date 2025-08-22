@@ -61,13 +61,16 @@ return (
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                         {
                             screenshots.map((item, i) => (
-                                <div key={i} className="w-full flex flex-col justify-center">
+                                <div title={employee_id + "_"+item.screenshot_id} key={employee_id + "_" + item.screenshot_id} className="w-full flex flex-col justify-center">
                                     <Image
                                         width={500}
                                         height={500}
-                                        className="object-cover object-center rounded-lg shadow-md mx-auto"
+                                        className="object-cover object-center rounded-lg shadow-md mx-auto cursor-pointer"
                                         src={`http://localhost:8000/screenshots/${employee_id}/${item.screenshot_id}.png`}
                                         alt="screenshot"
+                                        onClick={()=>{
+                                            window.open(`http://localhost:8000/screenshots/${employee_id}/${item.screenshot_id}.png`)
+                                        }}
                                     />
                                     <p className='text-center text-xl'>{item.screenshot_date}</p>
                                 </div>
