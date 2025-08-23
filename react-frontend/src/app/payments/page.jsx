@@ -6,7 +6,7 @@ const Payments = () => {
 
     useEffect(()=>{
         (async()=>{
-            const resp = await fetch("http://localhost:8000/timelogs/totalTime",{
+            const resp = await fetch(`${process.env.BACKEND_BASE_URL}/timelogs/totalTime`,{
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json"

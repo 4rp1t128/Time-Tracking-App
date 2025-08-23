@@ -7,7 +7,7 @@ const Employees = () => {
     const [email,setEmail] = useState("")
     useEffect(()=>{
         (async()=>{
-            const resp = await fetch("http://localhost:8000/employees/all");
+            const resp = await fetch(`${process.env.BACKEND_BASE_URL}/employees/all`);
             const data = await resp.json()
             console.log(data)
             setEmployees(data["results"]);
@@ -19,7 +19,7 @@ const Employees = () => {
           alert("Fill all fields")
           return
         }
-        const resp = await fetch("http://localhost:8000/employees/add",{
+        const resp = await fetch(`${process.env.BACKEND_BASE_URL}/employees/add`,{
           method:"POST",
            headers:{
                 "Content-Type":"application/json"

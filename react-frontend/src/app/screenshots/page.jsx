@@ -10,7 +10,7 @@ const Screenshots = () => {
           alert("Fill all fields")
           return
         }
-        const resp = await fetch("http://localhost:8000/screenshots/all",{
+        const resp = await fetch(`${process.env.BACKEND_BASE_URL}/screenshots/all`,{
           method:"POST",
            headers:{
                 "Content-Type":"application/json"
@@ -66,10 +66,10 @@ return (
                                         width={500}
                                         height={500}
                                         className="object-cover object-center rounded-lg shadow-md mx-auto cursor-pointer"
-                                        src={`http://localhost:8000/screenshots/${employee_id}/${item.screenshot_id}.png`}
+                                        src={`${process.env.BACKEND_BASE_URL}/screenshots/${employee_id}/${item.screenshot_id}.png`}
                                         alt="screenshot"
                                         onClick={()=>{
-                                            window.open(`http://localhost:8000/screenshots/${employee_id}/${item.screenshot_id}.png`)
+                                            window.open(`${process.env.BACKEND_BASE_URL}/screenshots/${employee_id}/${item.screenshot_id}.png`)
                                         }}
                                     />
                                     <p className='text-center text-xl'>{item.screenshot_date}</p>

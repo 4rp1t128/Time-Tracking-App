@@ -7,7 +7,7 @@ const Projects = () => {
     const [desc,setDesc] = useState("")
     useEffect(()=>{
         (async()=>{
-            const resp = await fetch("http://localhost:8000/projects/all");
+            const resp = await fetch(`${process.env.BACKEND_BASE_URL}/projects/all`);
             const data = await resp.json()
             console.log(data)
             setProjects(data["results"]);
@@ -16,7 +16,7 @@ const Projects = () => {
 
     async function submit(){
         if(name == "" || desc == "") return
-        const resp = await fetch("http://localhost:8000/projects/add",{
+        const resp = await fetch(`${process.env.BACKEND_BASE_URL}/projects/add`,{
             method:"POST",
             headers:{
                 "Content-Type":"application/json"

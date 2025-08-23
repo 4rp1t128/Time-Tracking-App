@@ -9,7 +9,7 @@ const Activate = () => {
           alert("Fill all fields")
           return
         }
-        const resp = await fetch("http://localhost:8000/employees/activate",{
+        const resp = await fetch(`${process.env.BACKEND_BASE_URL}/employees/activate`,{
           method:"POST",
            headers:{
                 "Content-Type":"application/json"

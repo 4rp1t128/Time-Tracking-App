@@ -8,6 +8,9 @@ import os
 import random
 import time
 import uuid
+import dotenv
+
+dotenv.load_dotenv()
 
 class App():
     def __init__(self):
@@ -23,7 +26,7 @@ class App():
         self.all_todo_frame = Frame(self.root)
         self.all_logs_frame = Frame(self.root)
         self.menubar = Menu(self.root)
-        self.base_api = "http://localhost:8000"
+        self.base_api = os.getenv("BACKEND_BASE_URL")
 
         self.db = None
         self.collection = None

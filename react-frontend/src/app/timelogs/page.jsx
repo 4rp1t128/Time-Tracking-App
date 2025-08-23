@@ -6,7 +6,7 @@ const TimeLogs = () => {
 
     useEffect(()=>{
         (async()=>{
-            const resp = await fetch("http://localhost:8000/timelogs/all",{
+            const resp = await fetch(`${process.env.BACKEND_BASE_URL}/timelogs/all`,{
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json"

@@ -8,7 +8,7 @@ const Tasks = () => {
     const [desc,setDesc] = useState("")
     useEffect(()=>{
         (async()=>{
-            const resp = await fetch("http://localhost:8000/tasks/all");
+            const resp = await fetch(`${process.env.BACKEND_BASE_URL}/tasks/all`);
             const data = await resp.json()
             console.log(data)
             setTasks(data["results"]);
@@ -17,7 +17,7 @@ const Tasks = () => {
 
     async function submit(){
         if(pid == "" || desc == "" || eid === "") return
-        const resp = await fetch("http://localhost:8000/tasks/add",{
+        const resp = await fetch(`${process.env.BACKEND_BASE_URL}/tasks/add`,{
             method:"POST",
             headers:{
                 "Content-Type":"application/json"
