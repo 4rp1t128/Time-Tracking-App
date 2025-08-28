@@ -1,11 +1,16 @@
 "use client";
+import Navbar from "@/components/Navbar";
 import React, { useEffect, useState } from "react";
+import useLogin from "@/utils/useLogin";
+import { useRouter } from "next/navigation";
 
 const Tasks = () => {
   const [tasks, setTasks] = useState([]);
   const [eid, setEid] = useState("");
   const [pid, setPid] = useState("");
   const [desc, setDesc] = useState("");
+  const {isLogin, check, token} = useLogin();
+  const router = useRouter();
   useEffect(() => {
     (async () => {
       const resp = await fetch(
@@ -44,8 +49,15 @@ const Tasks = () => {
     }
   }
 
-  return (
+  useEffect(() => {
+    if (!isLogin && check) {
+      router.push("/login");
+    }
+  }, [isLogin, check]);
+
+  return isLogin ? (
     <>
+      <Navbar />
       <form onSubmit={(e) => e.preventDefault()}>
         <div className="space-y-12 container mx-auto w-[70%] my-4">
           <div className="border-b border-gray-900/10 pb-12">
@@ -185,7 +197,7 @@ const Tasks = () => {
         </div>
       </div>
     </>
-  );
+  ):null;
 };
 
 export default Tasks;
