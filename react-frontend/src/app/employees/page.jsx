@@ -1,11 +1,18 @@
 "use client";
+import Navbar from "@/components/Navbar";
 import React, { useEffect, useState } from "react";
+import useLogin from "@/utils/useLogin";
+import { useRouter } from "next/navigation";
 
 const Employees = () => {
   const [employees, setEmployees] = useState([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const { isLogin, check, token } = useLogin();
+  const router = useRouter();
+
   useEffect(() => {
+    //IIFE - Immediately Invoked Function Expression
     (async () => {
       const resp = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/employees/all`
@@ -14,6 +21,8 @@ const Employees = () => {
       console.log(data);
       setEmployees(data["results"]);
     })();
+
+    console.log("effect");
   }, []);
 
   async function submit() {
@@ -44,8 +53,15 @@ const Employees = () => {
     }
   }
 
-  return (
+  useEffect(() => {
+    if (!isLogin && check) {
+      router.push("/login");
+    }
+  }, [isLogin, check]);
+
+  return isLogin ? (
     <>
+      <Navbar />
       <form onSubmit={(e) => e.preventDefault()}>
         <div className="space-y-12 container mx-auto w-[70%] my-4">
           <div className="border-b border-gray-900/10 pb-12">
@@ -162,7 +178,7 @@ const Employees = () => {
         </div>
       </div>
     </>
-  );
+  ) : null;
 };
 
 export default Employees;

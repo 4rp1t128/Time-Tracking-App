@@ -1,10 +1,17 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Navbar from "@/components/Navbar";
+import useLogin from "@/utils/useLogin";
+import { useRouter } from "next/navigation";
+
 const Screenshots = () => {
   const [id, setID] = useState("");
   const [employee_id, setEmployeeId] = useState("");
   const [screenshots, setScreenshots] = useState([]);
+  const { isLogin, check, token } = useLogin();
+  const router = useRouter();
+
   async function submit() {
     if (id == "") {
       alert("Fill all fields");
@@ -32,8 +39,16 @@ const Screenshots = () => {
       alert("Error Occured");
     }
   }
-  return (
+
+  useEffect(() => {
+    if (!isLogin && check) {
+      router.push("/login");
+    }
+  }, [isLogin, check]);
+
+  return isLogin ? (
     <>
+      <Navbar />
       <form onSubmit={(e) => e.preventDefault()}>
         <div className="space-y-12 container mx-auto w-[70%] my-4">
           <div className="border-b border-gray-900/10 pb-12">
@@ -110,7 +125,7 @@ const Screenshots = () => {
         </div>
       </div>
     </>
-  );
+  ) : null;
 };
 
 export default Screenshots;
